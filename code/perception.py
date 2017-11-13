@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from rover_state import RoverState
 
 # Identify pixels above the threshold
 # Threshold of RGB > 160 does a nice job of identifying ground pixels only
@@ -69,17 +70,40 @@ def pix_to_world(xpix, ypix, xpos, ypos, yaw, world_size, scale):
     # Return the result
     return x_pix_world, y_pix_world
 
+
+FRAME_SHAPE = (160, 320)
+FRAME_ORIGIN = (FRAME_SHAPE[0], FRAME_SHAPE[1]/2)
+DST_SIZE = 5
+BOTTOM_OFFSET = 6
+WORLD_SIZE = 200
+
+STD_PERSPECTIVE_SOURCE = \
+  np.float32([[14.32 , 140.71], [ 120.78, 95.5],
+              [199.49 ,96.84], [302.7 ,140.71]])
+
+STD_PERSPECTIVE_TARGET = \
+  np.float32([[FRAME_SHAPE[1]/2 - DST_SIZE,
+               FRAME_SHAPE[0] - BOTTOM_OFFSET],
+              [FRAME_SHAPE[1]/2 - DST_SIZE,
+               FRAME_SHAPE[0] - BOTTOM_OFFSET - 2 * DST_SIZE],
+              [FRAME_SHAPE[1]/2 + DST_SIZE,
+               FRAME_SHAPE[0] - BOTTOM_OFFSET - 2 * DST_SIZE],
+              [FRAME_SHAPE[1]/2 + DST_SIZE,
+               FRAME_SHAPE[0] - BOTTOM_OFFSET]])
+
+PERSPECTIVE_PARAM = cv2.getPerspectiveTransform(
+    STD_PERSPECTIVE_SOURCE, STD_PERSPECTIVE_TARGET)
+
 # Define a function to perform a perspective transform
-def perspect_transform(img, src, dst):
-           
-    M = cv2.getPerspectiveTransform(src, dst)
-    warped = cv2.warpPerspective(img, M, (img.shape[1], img.shape[0]))# keep same size as input image
-    
+def perspect_transform(img):
+    warped = cv2.warpPerspective(
+        img, PERSPECTIVE_PARAM, (img.shape[1], img.shape[0]))  # keep same size as input image
+
     return warped
 
 
 # Apply the above functions in succession and update the Rover state accordingly
-def perception_step(Rover):
+def perception_step(rover: RoverState):
     # Perform perception steps to update Rover()
     # TODO: 
     # NOTE: camera image is coming to you in Rover.img
@@ -102,8 +126,18 @@ def perception_step(Rover):
     # Update Rover pixel distances and angles
         # Rover.nav_dists = rover_centric_pixel_distances
         # Rover.nav_angles = rover_centric_angles
-    
- 
-    
-    
-    return Rover
+
+    warped = perspect_transform(rover.img)
+    road = color_thresh(warped)
+    road = rover_coords(road)
+    map_update = pix_to_world(
+        road[0], road[1], rover.pos[0],
+        rover.pos[1], rover.yaw, WORLD_SIZE, SCALE)
+    rover.worldmap[map_update[0], map_update[1], 0] += 1
+
+    dist, angles = to_polar_coords(road[0], road[1])
+
+    rover.nav_angles = angles
+    rover.nav_dists = dist
+
+    return rover
