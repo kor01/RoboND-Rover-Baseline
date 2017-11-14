@@ -76,6 +76,7 @@ FRAME_ORIGIN = (FRAME_SHAPE[0], FRAME_SHAPE[1]/2)
 DST_SIZE = 5
 BOTTOM_OFFSET = 6
 WORLD_SIZE = 200
+SCALE = 2 * DST_SIZE
 
 STD_PERSPECTIVE_SOURCE = \
   np.float32([[14.32 , 140.71], [ 120.78, 95.5],
@@ -127,16 +128,28 @@ def perception_step(rover: RoverState):
         # Rover.nav_dists = rover_centric_pixel_distances
         # Rover.nav_angles = rover_centric_angles
 
-    warped = perspect_transform(rover.img)
-    road = color_thresh(warped)
+    road = color_thresh(rover.img)
+
+    # regularization above vision singular
+    road[:75, :] = 0
+    
+    road = perspect_transform(road)
+
+    rover.vision_image[:, :, 0] = road * 255
     road = rover_coords(road)
+    
+    #road = (road[0][idx], road[1][idx])
+
     map_update = pix_to_world(
         road[0], road[1], rover.pos[0],
         rover.pos[1], rover.yaw, WORLD_SIZE, SCALE)
-    rover.worldmap[map_update[0], map_update[1], 0] += 1
+    rover.worldmap[map_update[1], map_update[0], 2] = 1
 
     dist, angles = to_polar_coords(road[0], road[1])
 
+    idx = dist < 20
+    dist, angles = dist[idx], angles[idx]
+    
     rover.nav_angles = angles
     rover.nav_dists = dist
 

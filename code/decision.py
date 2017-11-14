@@ -1,9 +1,9 @@
 import numpy as np
-
+from rover_state import RoverState
 
 # This is where you can build a decision tree for determining throttle, brake and steer 
 # commands based on the output of the perception_step() function
-def decision_step(rover):
+def decision_step(rover: RoverState):
 
     # Implement conditionals to decide what to do given perception data
     # Here you're all set up with some basic functionality but you'll need to
@@ -11,10 +11,12 @@ def decision_step(rover):
 
     # Example:
     # Check if we have vision data to make decisions with
+    print(rover.nav_angles)
     if rover.nav_angles is not None:
         # Check for Rover.mode status
         if rover.mode == 'forward':
             # Check the extent of navigable terrain
+            
             if len(rover.nav_angles) >= rover.stop_forward:
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
@@ -27,7 +29,7 @@ def decision_step(rover):
                 # Set steering to average angle clipped to the range +/- 15
                 rover.steer = np.clip(np.mean(rover.nav_angles * 180 / np.pi), -15, 15)
             # If there's a lack of navigable terrain pixels then go to 'stop' mode
-            elif len(rover.nav_angles) < rover.stop_forward:
+            else:
                     # Set mode to "stop" and hit the brakes!
                     rover.throttle = 0
                     # Set brake to stored brake value
