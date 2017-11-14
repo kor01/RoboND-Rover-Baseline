@@ -180,10 +180,28 @@ def circle_cluster(angles, threshold):
     ball = tree.query_ball_point(p, threshold)
     balls.append(ball)
 
-  for ball in balls[0]:
-    expanded = set()
-    pids = [value_to_id[x] for x in ball]
+  expanded = set()
+  current_cluster = set()
+  for i, ball in balls[0]:
+
+    if i in expanded:
+      continue
+
+    current_cluster += ball
+    expanded.add(i)
     
+    residue = current_cluster
+
+    while len(residue) > 0:
+      pids = [value_to_id[x] for x in residue]
+      for pid in pids:
+        current_cluster += balls[pid]
+        expanded.add(pid)
+      residue =
+
+
+
+
 
 
 

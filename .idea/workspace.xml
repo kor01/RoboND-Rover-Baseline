@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cb73b65-5631-4075-aff1-12f685a3c86c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/geometry.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/perspective.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/rover_param.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/zyx_perspective.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/code/.ipynb_checkpoints/Rover_Project_Test_Notebook-checkpoint.ipynb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/RoboND-Rover-Project.iml" afterPath="$PROJECT_DIR$/.idea/RoboND-Rover-Project.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/perception.py" afterPath="$PROJECT_DIR$/code/perception.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/rover_state.py" afterPath="$PROJECT_DIR$/code/rover_state.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/geometry.py" afterPath="$PROJECT_DIR$/code/geometry.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -85,8 +76,8 @@
           <file leaf-file-name="geometry.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/code/geometry.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="892">
-                  <caret line="185" column="4" lean-forward="false" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
+                <state relative-caret-position="757">
+                  <caret line="191" column="4" lean-forward="false" selection-start-line="191" selection-start-column="4" selection-end-line="191" selection-end-column="4" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -403,8 +394,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/geometry.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="892">
-          <caret line="185" column="4" lean-forward="false" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
+        <state relative-caret-position="757">
+          <caret line="191" column="4" lean-forward="false" selection-start-line="191" selection-start-column="4" selection-end-line="191" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
