@@ -35,7 +35,7 @@ class RoverState(object):
     # when you can keep going and when you should stop.  Feel free to
     # get creative in adding new fields or modifying these!
     self.stop_forward = 10 # Threshold to initiate stopping
-    self.go_forward = 200 # Threshold to go forward again
+    self.go_forward = 500 # Threshold to go forward again
     self.max_vel = 2 # Maximum velocity (meters/second)
     self.min_distance = 2
     # Image output from perception step

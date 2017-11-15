@@ -244,7 +244,7 @@ def unique_particles(particles):
 
 class CalibratedPerception(object):
 
-  def __init__(self, drop=5):
+  def __init__(self, drop=2):
     self._extractor = create_interpolation()
     self._horizon_length = get_horizon_length()
     self._perspect = create_zyx_perspective()

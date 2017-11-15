@@ -1,5 +1,7 @@
 import numpy as np
 from rover_state import RoverState
+from geometry import circle_distance
+
 
 # This is where you can build a decision tree for determining throttle, brake and steer 
 # commands based on the output of the perception_step() function
@@ -11,7 +13,7 @@ def decision_step(rover: RoverState):
 
     # Example:
     # Check if we have vision data to make decisions with
-    print(rover.nav_angles)
+    
     if rover.nav_angles is not None:
         # Check for Rover.mode status
         if rover.mode == 'forward':
@@ -39,6 +41,7 @@ def decision_step(rover: RoverState):
 
         # If we're already in "stop" mode then make different decisions
         elif rover.mode == 'stop':
+            print('in stop mode')
             # If we're in stop mode but still moving keep braking
             if rover.vel > 0.2:
                 rover.throttle = 0
@@ -46,15 +49,23 @@ def decision_step(rover: RoverState):
                 rover.steer = 0
             # If we're not moving (vel < 0.2) then do something else
             elif rover.vel <= 0.2:
+                
+                mean_angle = np.pi / 2
+
+                if len(rover.nav_angles) > 0:
+                    mean_angle = abs(rover.nav_angles.mean())
+                
+                print('current mean_angle', mean_angle)
+                    
                 # Now we're stopped and we have vision data to see if there's a path forward
-                if len(rover.nav_angles) < rover.go_forward:
+                if len(rover.nav_angles) < rover.go_forward or mean_angle > np.pi / 8:
                     rover.throttle = 0
                     # Release the brake to allow turning
                     rover.brake = 0
                     # Turn range is +/- 15 degrees, when stopped the next line will induce 4-wheel turning
                     rover.steer = -15 # Could be more clever here about which way to turn
                 # If we're stopped but see sufficient navigable terrain in front then go!
-                if len(rover.nav_angles) >= rover.go_forward:
+                else:
                     # Set throttle back to stored value
                     rover.throttle = rover.throttle_set
                     # Release the brake

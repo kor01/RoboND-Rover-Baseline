@@ -4,6 +4,23 @@ from rover_state import RoverState
 from perspective import CalibratedPerception
 from perspective import CV2Perception
 from geometry import to_polar_coords
+import rover_param as spec
+
+
+
+def render_particles(particles):
+  particles = particles.transpose()
+  particles = particles * spec.DST_SIZE * 2
+  particles[:, 1] *= -1
+  y_size, x_size = spec.FRAME_SHAPE
+  particles[:, 1] += x_size / 2
+  particles[:, 0] = y_size - particles[:, 0]
+  particles = np.around(particles).astype('uint32')
+  particles[:, 1] = particles[:, 1].clip(0, x_size - 1)
+  particles[:, 0] = particles[:, 0].clip(0, y_size - 1)
+  render = np.zeros(spec.FRAME_SHAPE, dtype=np.uint8)
+  render[particles[:, 0], particles[:, 1]] = 255
+  return render
 
 
 CALIBRATED_PERCEPTION = CalibratedPerception()
@@ -37,9 +54,12 @@ def perception_step(rover: RoverState):
 
   w_coords, b_coords = CALIBRATED_PERCEPTION.evaluate(rover)
 
+  front_view = render_particles(b_coords)
+  rover.vision_image[:, :, 2] = front_view
+
   dists, angles = to_polar_coords(b_coords[0], b_coords[1])
 
-  rover.worldmap[w_coords[1], w_coords[0], 2] += 1
+  rover.worldmap[w_coords[1], w_coords[0], 2] += 255
 
   idx = dists < 20
   dist, angles = dists[idx], angles[idx]

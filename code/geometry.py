@@ -79,7 +79,9 @@ def _quant_get_param(arr, precision):
 
 
 def quant_unique(coords, precision):
-
+  if coords.size == 0:
+    return coords
+    
   x_min, x_span = _quant_get_param(coords[0, :], precision)
   y_min, y_span = _quant_get_param(coords[1, :], precision)
   quants = np.zeros((x_span, y_span), dtype=np.uint8)
@@ -197,7 +199,6 @@ def circle_cluster(angles, threshold):
       for pid in pids:
         current_cluster += balls[pid]
         expanded.add(pid)
-      residue =
 
 
 
