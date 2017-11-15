@@ -4,8 +4,8 @@ from rover_state import RoverState
 from perspective import CalibratedPerception
 from perspective import CV2Perception
 from geometry import to_polar_coords
+from geometry import degree_to_rad
 import rover_param as spec
-
 
 
 def render_particles(particles):
@@ -21,6 +21,77 @@ def render_particles(particles):
   render = np.zeros(spec.FRAME_SHAPE, dtype=np.uint8)
   render[particles[:, 0], particles[:, 1]] = 255
   return render
+
+def vote_on_mesh(
+    values, bins, min_val=None, max_val=None):
+
+  min_val = min_val or values.min()
+  max_val = max_val or values.max()
+  interval = (max_val - min_val) / bins
+  mesh = np.linspace(min_val, max_val, bins + 1)
+  predicates = np.abs(mesh[:, None] - values) < interval
+  predicates = predicates.astype('int32')
+  num_votes = predicates.sum(axis=-1)
+  return predicates, num_votes
+
+
+def densely_distributed(dists, bins):
+  _, votes = vote_on_mesh(dists, bins, min_val=1.0)
+  return votes.min() > 0
+
+
+def cluster_to_mesh(values, bins):
+
+  predicates, num_votes = vote_on_mesh(values, bins)
+
+  clusters = []
+  current_cluster = set()
+  for i in range(len(bins)):
+    ids = np.where(predicates[i])[0]
+    if len(ids) == 0:
+      if len(current_cluster) != 0:
+        clusters.append(list(current_cluster))
+        current_cluster = set()
+    else:
+      current_cluster += ids
+
+  if len(current_cluster) > 0:
+    clusters.append(list(current_cluster))
+
+  return clusters
+
+
+def particles_to_ray(particles):
+  dists, angles = to_polar_coords(
+    particles[0], particles[1])
+
+  # range in (-60, 60)
+  threshold = np.pi / 3
+  idx = (-threshold < angles < threshold)
+  dists, angles = dists[idx], angles[idx]
+
+  # 240 ray proposals, 0.5 degree interval
+  proposals = np.linspace(-threshold, threshold, 240 + 1)
+
+  angular_delta = np.abs(proposals[:, None] - angles[None, :])
+
+  votes = angular_delta < (np.pi / 360)
+
+  rays = []
+  for i in range(240):
+    vote_dist = dists[votes[i, :]]
+    if densely_distributed(vote_dist, bins=20):
+      rays.append(proposals[i], vote_dist.max())
+
+  return rays
+
+
+def generate_directions(clusters, rays):
+  ret = []
+  for cluster in clusters:
+    direction = np.mean([rays[x][0] for x in cluster])
+    ret.append(direction)
+  return ret
 
 
 CALIBRATED_PERCEPTION = CalibratedPerception()
@@ -60,6 +131,14 @@ def perception_step(rover: RoverState):
   dists, angles = to_polar_coords(b_coords[0], b_coords[1])
 
   rover.worldmap[w_coords[1], w_coords[0], 2] += 255
+  rays = particles_to_ray(b_coords)
+
+  high_rays = [x for x in rays if x[1] > 10]
+  clusters = cluster_to_mesh(
+    np.array(x[0] for x in high_rays), degree_to_rad(3))
+
+  directions = generate_directions(clusters, high_rays)
+  rover.directions = directions
 
   idx = dists < 20
   dist, angles = dists[idx], angles[idx]

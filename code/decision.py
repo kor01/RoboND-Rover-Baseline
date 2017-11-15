@@ -1,6 +1,6 @@
 import numpy as np
 from rover_state import RoverState
-from geometry import circle_distance
+from geometry import rad_to_degree
 
 
 # This is where you can build a decision tree for determining throttle, brake and steer 
@@ -29,7 +29,20 @@ def decision_step(rover: RoverState):
                     rover.throttle = 0
                 rover.brake = 0
                 # Set steering to average angle clipped to the range +/- 15
-                rover.steer = np.clip(np.mean(rover.nav_angles * 180 / np.pi), -15, 15)
+
+                # randomized policy pick to get out of deterministic policy
+                if rover.directions is None or len(rover.directions) == 0:
+                    direction = np.mean(rover.nav_angles)
+                    rover.direction_pick = None
+                else:
+                    if rover.direction_pick is None \
+                        or rover.direction_pick >= len(rover.directions):
+                        rover.direction_pick = \
+                            np.random.randint(0, len(rover.directions))
+                    direction = rover.directions[rover.direction_pick]
+
+                rover.steer = np.clip(rad_to_degree(direction), -15, 15)
+
             # If there's a lack of navigable terrain pixels then go to 'stop' mode
             else:
                     # Set mode to "stop" and hit the brakes!
@@ -71,7 +84,9 @@ def decision_step(rover: RoverState):
                     # Release the brake
                     rover.brake = 0
                     # Set steer to mean angle
-                    rover.steer = np.clip(np.mean(rover.nav_angles * 180 / np.pi), -15, 15)
+                    direction = np.mean(rover.nav_angles)
+                    rover.steer = np.clip(
+                        rad_to_degree(direction), -15, 15)
                     rover.mode = 'forward'
     # Just to make the rover do something 
     # even if no modifications have been made to the code
