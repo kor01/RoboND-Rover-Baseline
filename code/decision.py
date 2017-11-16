@@ -13,12 +13,12 @@ def decision_step(rover: RoverState):
 
     # Example:
     # Check if we have vision data to make decisions with
-    
+
+    rover.step += 1
     if rover.nav_angles is not None:
         # Check for Rover.mode status
         if rover.mode == 'forward':
             # Check the extent of navigable terrain
-            
             if len(rover.nav_angles) >= rover.stop_forward:
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
@@ -31,15 +31,19 @@ def decision_step(rover: RoverState):
                 # Set steering to average angle clipped to the range +/- 15
 
                 # randomized policy pick to get out of deterministic policy
+                
                 if rover.directions is None or len(rover.directions) == 0:
                     direction = np.mean(rover.nav_angles)
-                    rover.direction_pick = None
+                    if rover.step - rover.last_roll > 500:
+                        rover.direction_pick = None
                 else:
                     if rover.direction_pick is None \
                         or rover.direction_pick >= len(rover.directions):
-                        rover.direction_pick = \
-                            np.random.randint(0, len(rover.directions))
+                        rover.direction_pick = np.random.randint(0, len(rover.directions))
+                        rover.last_roll = rover.step
+                    
                     direction = rover.directions[rover.direction_pick]
+                    print('picked direction:', direction, rover.step)
 
                 rover.steer = np.clip(rad_to_degree(direction), -15, 15)
 

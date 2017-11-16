@@ -160,7 +160,7 @@ def pix_to_world(xpix, ypix, xpos, ypos, yaw, world_size):
   x_pix_world = np.clip(np.int_(xpix_tran), 0, world_size - 1)
   y_pix_world = np.clip(np.int_(ypix_tran), 0, world_size - 1)
   # Return the result
-  return x_pix_world, y_pix_world
+  return np.array([x_pix_world, y_pix_world])
 
 
 
@@ -199,11 +199,4 @@ def circle_cluster(angles, threshold):
       for pid in pids:
         current_cluster += balls[pid]
         expanded.add(pid)
-
-
-
-
-
-
-
 

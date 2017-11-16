@@ -250,15 +250,9 @@ class CalibratedPerception(object):
     self._perspect = create_zyx_perspective()
     self._zyx_singular_drop = drop
 
-  def evaluate(self, state: RoverState):
-    coords = convert_camera_coords(state.img)
+  def trans_particles(self, particles, state):
     pitch = degree_to_rad(state.pitch)
     roll = -degree_to_rad(state.roll)
-    singular = self._perspect.get_singular(
-      pitch=pitch, roll=roll)
-    singular = singular_to_frame_pos(singular, 0)
-    particles = self._extractor.extract_particles(
-      coords, singularity=singular)
     kx, ky, b = self._perspect.denominator(roll, pitch)
     drop = pixel_scale_to_frame_scale(
       self._zyx_singular_drop)
@@ -278,16 +272,37 @@ class CalibratedPerception(object):
 
     return w_coords, b_coords
 
+  def evaluate(self, state: RoverState):
+    coords = convert_camera_coords(state.img)
+    pitch = degree_to_rad(state.pitch)
+    roll = -degree_to_rad(state.roll)
+    singular = self._perspect.get_singular(
+      pitch=pitch, roll=roll)
+    singular = singular_to_frame_pos(singular, 0)
+    particles = self._extractor.extract_particles(
+      coords, singularity=singular)
+    return self.trans_particles(particles, state)
 
+  
+
+CV2_PERSPECT_PARAM = cv2.getPerspectiveTransform(
+  spec.STD_PERSPECTIVE_SOURCE, spec.STD_PERSPECTIVE_TARGET)
+  
 class CV2Perception(object):
 
   def __init__(self):
     self._cv2_m = cv2.getPerspectiveTransform(
       spec.STD_PERSPECTIVE_SOURCE, spec.STD_PERSPECTIVE_TARGET)
 
-  def evaluate(self, state: RoverState):
-    b_coords = color_thresh(state.img)
-    b_coords[:75, :] = 0
+  def evaluate(self, state: RoverState, segment=None):
+    
+    if segment is None:
+      b_coords = color_thresh(state.img)
+      b_coords[:75, :] = 0
+    else:
+      b_coords = segment
+
+    
     b_coords = cv2.warpPerspective(
       b_coords, self._cv2_m, (b_coords.shape[1], b_coords.shape[0]))
     b_coords = rover_coords(b_coords)
@@ -299,5 +314,5 @@ class CV2Perception(object):
     w_coords = pix_to_world(
       b_coords[0], b_coords[1], state.pos[0],
       state.pos[1], state.yaw, spec.WORLD_SIZE)
-
+    
     return w_coords, b_coords
