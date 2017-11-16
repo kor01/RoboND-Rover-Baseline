@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.spatial import kdtree
 
 
 def color_thresh(img, rgb_thresh=(0, 0, 0), dtype='uint8'):
@@ -42,7 +41,7 @@ def circle_distance(a, b, rad_unit=False):
   return np.minimum(d, cd)
 
 
-def convert_camera_coords(image_or_coords: np.ndarray) -> np.ndarray:
+def flip_image_origin(image_or_coords: np.ndarray) -> np.ndarray:
   """
   convention: left down corner as image origin,
   vertical up direction as x axis
@@ -62,6 +61,9 @@ def to_polar_coords(x, y):
   pred = np.logical_and(theta <= np.pi, pred)
   assert pred.all()
   return r, theta
+
+def polar_to_cartesian(r, theta):
+  return np.array([r * np.cos(theta), r * np.sin(theta)])
 
 
 def degree_to_rad(degree):
@@ -161,42 +163,3 @@ def pix_to_world(xpix, ypix, xpos, ypos, yaw, world_size):
   y_pix_world = np.clip(np.int_(ypix_tran), 0, world_size - 1)
   # Return the result
   return np.array([x_pix_world, y_pix_world])
-
-
-
-def circle_cluster(angles, threshold):
-
-  tree = kdtree.KDTree(angles)
-
-  clustered = set()
-
-  current_cluster = None
-
-  clusters = []
-  correspondence = {}
-
-  value_to_id = dict(enumerate(angles))
-
-  balls = []
-  for i, p in enumerate(angles):
-    ball = tree.query_ball_point(p, threshold)
-    balls.append(ball)
-
-  expanded = set()
-  current_cluster = set()
-  for i, ball in balls[0]:
-
-    if i in expanded:
-      continue
-
-    current_cluster += ball
-    expanded.add(i)
-    
-    residue = current_cluster
-
-    while len(residue) > 0:
-      pids = [value_to_id[x] for x in residue]
-      for pid in pids:
-        current_cluster += balls[pid]
-        expanded.add(pid)
-

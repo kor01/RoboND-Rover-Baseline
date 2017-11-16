@@ -6,7 +6,7 @@ from geometry import clip_to_integer
 from geometry import color_thresh
 from geometry import rotation_matrix_2d
 from geometry import translation
-from geometry import convert_camera_coords
+from geometry import flip_image_origin
 from geometry import degree_to_rad
 from geometry import quant_unique
 from geometry import drop_range
@@ -245,12 +245,12 @@ def unique_particles(particles):
 class CalibratedPerception(object):
 
   def __init__(self, drop=2):
-    self._extractor = create_interpolation()
     self._horizon_length = get_horizon_length()
     self._perspect = create_zyx_perspective()
     self._zyx_singular_drop = drop
 
   def trans_particles(self, particles, state):
+
     pitch = degree_to_rad(state.pitch)
     roll = -degree_to_rad(state.roll)
     kx, ky, b = self._perspect.denominator(roll, pitch)
@@ -259,31 +259,23 @@ class CalibratedPerception(object):
     particles = drop_linear(particles, kx, ky, b, drop)
     b_coords = self._perspect.particle_transform(
       particles=particles, pitch=pitch, roll=roll)
-
     b_coords = drop_range(b_coords, axis=0, low=0, high=40)
     b_coords = drop_range(b_coords, axis=1, low=-160, high=160)
-    b_coords = quant_unique(b_coords, 8)
-
+    #b_coords = quant_unique(b_coords, 8)
     rotation = rotation_matrix_2d(state.yaw)
     w_coords = rotation @ b_coords
     w_coords = translation(*state.pos, w_coords)
     w_coords = clip_fit_map(w_coords)
     w_coords = unique_particles(w_coords)
-
     return w_coords, b_coords
 
-  def evaluate(self, state: RoverState):
-    coords = convert_camera_coords(state.img)
-    pitch = degree_to_rad(state.pitch)
-    roll = -degree_to_rad(state.roll)
-    singular = self._perspect.get_singular(
-      pitch=pitch, roll=roll)
-    singular = singular_to_frame_pos(singular, 0)
-    particles = self._extractor.extract_particles(
-      coords, singularity=singular)
+  def evaluate(self, image, state: RoverState):
+    coords = flip_image_origin(image)
+    particles = np.array(coords.nonzero())
+    particles = particles / spec.PIXEL_SCALING
     return self.trans_particles(particles, state)
 
-  
+
 
 CV2_PERSPECT_PARAM = cv2.getPerspectiveTransform(
   spec.STD_PERSPECTIVE_SOURCE, spec.STD_PERSPECTIVE_TARGET)
@@ -309,6 +301,7 @@ class CV2Perception(object):
 
     scale = spec.DST_SIZE * 2
     b_coords = (b_coords[0] / scale, b_coords[1] / scale)
+
 
     # to world coordinate frame
     w_coords = pix_to_world(

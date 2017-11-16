@@ -1,16 +1,15 @@
 import numpy as np
-import cv2
 from rover_state import RoverState
 from perspective import CalibratedPerception
 from perspective import CV2Perception
 from geometry import to_polar_coords
-from geometry import degree_to_rad
+from geometry import polar_to_cartesian
 import rover_param as spec
 
 def add_to_set(coll, delta):
   for x in delta:
     coll.add(x)
-    
+
 
 def render_particles(particles):
   particles = particles.transpose()
@@ -97,7 +96,7 @@ def particles_to_ray(particles):
     if densely_distributed(vote_dist, bins=20):
       rays.append((proposals[i], vote_dist.max()))
 
-  return rays
+  return np.array(rays)
 
 
 def generate_directions(clusters, rays):
@@ -131,6 +130,25 @@ def extract_rock_pos(segment):
   idx = y.argmin()
   print(y, x)
   return x[idx], y[idx]
+
+
+def extract_obstacles(rays, bound):
+  # get ride of the rays ends of max_range
+
+  r, theta = rays[:, 1], rays[:, 0]
+  num_low = (r > 5).sum()
+  ratio = float(num_low) / len(rays)
+
+  # unlikely to be obstacles, more likely to be road edge
+  if ratio > 0.8:
+    return []
+
+  short_rays = rays[r < bound]
+  # get ride of very short ray
+  short_rays = short_rays[r > 0.5]
+  short_r, short_theta = short_rays[:, 1], short_rays[:, 0]
+  edge_points = polar_to_cartesian(short_r, short_theta)
+  return edge_points
 
 
 CALIBRATED_PERCEPTION = CalibratedPerception()
@@ -171,10 +189,8 @@ def perception_step(rover: RoverState):
   
   rays = particles_to_ray(b_coords)
 
-  high_rays = [x for x in rays if x[1] > 8]
-
-  high_angles = np.array([x[0] for x in high_rays])
-  
+  high_rays = rays[rays[:, 1] > 8, :]
+  high_angles = high_rays[:, 0]
   clusters = cluster_to_mesh(high_angles, 8)
   
   if len(clusters) > 1:
@@ -194,6 +210,8 @@ def perception_step(rover: RoverState):
     print('rock_coord:', w_sample)
     rover.worldmap[w_sample[1], w_sample[0], 1] += 1
 
+  obstacles = extract_obstacles(rays, 5)
+  rover.worldmap[obstacles[1], obstacles[0], 0] += 1
 
   dists, angles = to_polar_coords(b_coords[0], b_coords[1])
   idx = dists < 20
