@@ -3,7 +3,7 @@ from mesh_cluster import cluster_on_mesh
 
 
 VIEW_ANGLE = np.pi / 3
-NUM_RAY_MESH = 120
+NUM_RAY_MESH = 240
 
 
 def interpolate_ray(
@@ -14,7 +14,7 @@ def interpolate_ray(
 
   proj_ratio = dists / (dists + focal_length)
   proj_dists = focal_height * proj_ratio
-
+  print('project_dim', proj_dists.min(), proj_dists.max())
   # find gap by mesh in projection
   # mesh cluster the projected dists
 
@@ -24,13 +24,13 @@ def interpolate_ray(
   for cluster in clusters:
     start, end = dists[cluster].min(), dists[cluster].max()
     ret.append((start, end))
+  print('num_segs:', len(ret))
   return np.array(ret)
 
 
-FOCAL_LENGTH = 0.5
-FOCAL_HEIGHT = 0.5
-INTERVAL = 0.1
-
+FOCAL_LENGTH = 5
+FOCAL_HEIGHT = 10
+INTERVAL = 0.3
 
 class Ray(object):
 
@@ -63,6 +63,8 @@ def particle_to_rays(
     vote_dist = dists[votes[i, :]]
     if len(vote_dist) <= 1:
       continue
+    print('vote_dims:', proposals[i],
+          vote_dist.min(), vote_dist.max(), len(vote_dist))
     ret.append(Ray(proposals[i], vote_dist))
 
   return ret

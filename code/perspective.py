@@ -294,14 +294,12 @@ class CV2Perception(object):
     else:
       b_coords = segment
 
-    
     b_coords = cv2.warpPerspective(
       b_coords, self._cv2_m, (b_coords.shape[1], b_coords.shape[0]))
     b_coords = rover_coords(b_coords)
 
     scale = spec.DST_SIZE * 2
     b_coords = (b_coords[0] / scale, b_coords[1] / scale)
-
 
     # to world coordinate frame
     w_coords = pix_to_world(

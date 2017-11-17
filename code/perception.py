@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 from rover_state import RoverState
 from perspective import CalibratedPerception
 from perspective import CV2Perception
@@ -11,10 +12,9 @@ def add_to_set(coll, delta):
     coll.add(x)
 
 
-def render_rays(rays):
-  particles = []
-  for ray in rays:
-    
+def show_image(image):
+  plt.imshow(image)
+  plt.show()
 
 
 def render_particles(particles):
@@ -31,12 +31,30 @@ def render_particles(particles):
   render[particles[:, 0], particles[:, 1]] = 255
   return render
 
+
+def rays_to_particles(rays, interval):
+  particles = []
+  for ray in rays:
+    for segment in ray.segments:
+      bins = int((segment[1] - segment[0]) / interval)
+      if bins == 0:
+        continue
+      quants = np.linspace(segment[0], segment[1], bins)
+      coords = polar_to_cartesian(quants, ray.theta)
+      particles.extend(coords.transpose())
+  particles = np.array(particles)
+  return particles.transpose()
+
+
+def render_rays(rays, interval=0.01):
+  particles = rays_to_particles(rays, interval)
+  return render_particles(particles)
+
+
 def vote_on_mesh(
     values, bins, min_val=None, max_val=None):
-
   min_val = min_val or values.min()
   max_val = max_val or values.max()
-  
   interval = (max_val - min_val) / bins
   mesh = np.linspace(min_val, max_val, bins + 1)
   predicates = np.abs(mesh[:, None] - values) < interval
