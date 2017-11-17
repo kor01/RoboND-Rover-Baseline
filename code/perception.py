@@ -11,6 +11,12 @@ def add_to_set(coll, delta):
     coll.add(x)
 
 
+def render_rays(rays):
+  particles = []
+  for ray in rays:
+    
+
+
 def render_particles(particles):
   particles = particles.transpose()
   particles = particles * spec.DST_SIZE * 2

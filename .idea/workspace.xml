@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cb73b65-5631-4075-aff1-12f685a3c86c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/mesh_cluster.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/object_detect.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/ray_detect.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/visualization.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/RoboND-Rover-Project.iml" afterPath="$PROJECT_DIR$/.idea/RoboND-Rover-Project.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/geometry.py" afterPath="$PROJECT_DIR$/code/geometry.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/mesh_cluster.py" afterPath="$PROJECT_DIR$/code/mesh_cluster.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/perception.py" afterPath="$PROJECT_DIR$/code/perception.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/perspective.py" afterPath="$PROJECT_DIR$/code/perspective.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/rover_state.py" afterPath="$PROJECT_DIR$/code/rover_state.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/visualization.ipynb" afterPath="$PROJECT_DIR$/code/visualization.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +26,8 @@
           <file leaf-file-name="decision.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/decision.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="112">
-                  <caret line="58" column="66" lean-forward="false" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
+                <state relative-caret-position="1314">
+                  <caret line="75" column="20" lean-forward="false" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -39,10 +36,12 @@
           <file leaf-file-name="rover_state.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/rover_state.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="787">
-                  <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+                <state relative-caret-position="1026">
+                  <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
+                    <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+                    <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -51,10 +50,11 @@
           <file leaf-file-name="perspective.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/perspective.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="525">
-                  <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+                <state relative-caret-position="324">
+                  <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
+                    <marker date="1510836666057" expanded="true" signature="8784:8814" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -73,7 +73,7 @@
           <file leaf-file-name="rover_param.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/rover_param.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
+                <state relative-caret-position="738">
                   <caret line="41" column="6" lean-forward="false" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
                   <folding />
                 </state>
@@ -83,8 +83,8 @@
           <file leaf-file-name="geometry.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/geometry.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-8">
-                  <caret line="79" column="47" lean-forward="true" selection-start-line="79" selection-start-column="47" selection-end-line="79" selection-end-column="47" />
+                <state relative-caret-position="1440">
+                  <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -93,8 +93,8 @@
           <file leaf-file-name="ray_detect.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/ray_detect.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+                <state relative-caret-position="342">
+                  <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -105,8 +105,8 @@
           <file leaf-file-name="mesh_cluster.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/code/mesh_cluster.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="570">
-                  <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+                <state relative-caret-position="396">
+                  <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -115,7 +115,7 @@
           <file leaf-file-name="drive_rover.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/drive_rover.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
+                <state relative-caret-position="216">
                   <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
                   <folding>
                     <element signature="e#27#42#0" expanded="true" />
@@ -128,11 +128,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="object_detect.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="object_detect.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/object_detect.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="847">
-                  <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+                <state relative-caret-position="324">
+                  <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -140,14 +140,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="perception.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="perception.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/code/perception.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-                  <folding>
-                    <element signature="e#0#18#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="180">
+                  <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -157,9 +155,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="413">
                   <caret line="100" column="16" lean-forward="false" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
-                  <folding>
-                    <element signature="e#0#10#0" expanded="true" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -167,21 +163,9 @@
           <file leaf-file-name="decision.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/code/decision.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
-                  <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
-                  <folding>
-                    <marker date="1510803230000" expanded="true" signature="2099:2173" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="2099:2555" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="2099:4329" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="2275:2555" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="2663:4329" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="2795:2908" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="3012:4329" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="3451:3780" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="3892:4329" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="4334:4430" ph="..." />
-                    <marker date="1510803230000" expanded="true" signature="4440:4532" ph="..." />
-                  </folding>
+                <state relative-caret-position="1116">
+                  <caret line="64" column="45" lean-forward="false" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -217,7 +201,6 @@
         <option value="$PROJECT_DIR$/code/.ipynb_checkpoints/geometry.py" />
         <option value="$PROJECT_DIR$/code/decision.py" />
         <option value="$PROJECT_DIR$/code/rover_state.py" />
-        <option value="$PROJECT_DIR$/code/perception.py" />
         <option value="$PROJECT_DIR$/code/detection.py" />
         <option value="$PROJECT_DIR$/code/object_detect.py" />
         <option value="$PROJECT_DIR$/code/geometry.py" />
@@ -226,6 +209,7 @@
         <option value="$PROJECT_DIR$/code/perspective.py" />
         <option value="$PROJECT_DIR$/code/ray_detect.py" />
         <option value="$PROJECT_DIR$/code/mesh_cluster.py" />
+        <option value="$PROJECT_DIR$/code/perception.py" />
       </list>
     </option>
   </component>
@@ -236,10 +220,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="-1920" />
-    <option name="y" value="36" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="x" value="65" />
+    <option name="y" value="382" />
+    <option name="width" value="1857" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -259,24 +243,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="RoboND-Rover-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoboND-Rover-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="RoboND-Rover-Baseline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboND-Rover-Baseline" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="RoboND-Rover-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoboND-Rover-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="RoboND-Rover-Baseline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboND-Rover-Baseline" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -319,28 +303,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="36" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="358" width="1920" height="1108" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1512247" sideWeight="0.49593496" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15261473" sideWeight="0.49593496" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1512247" sideWeight="0.50406504" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1512247" sideWeight="0.50406504" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +340,48 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/code/mesh_cluster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/object_detect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/perception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/perspective.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/decision.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="58" column="20" lean-forward="true" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/decision.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -370,6 +396,8 @@
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
@@ -378,9 +406,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4215">
           <caret line="281" column="28" lean-forward="true" selection-start-line="281" selection-start-column="28" selection-end-line="281" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -414,9 +440,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
           <caret line="143" column="0" lean-forward="true" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -442,9 +466,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1818">
           <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -454,6 +476,8 @@
           <caret line="4" column="32" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
@@ -474,6 +498,8 @@
           <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
@@ -515,9 +541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -525,20 +549,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
           <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.app/python3.6/envs/RoboND/lib/python3.5/site-packages/scipy/spatial/kdtree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1788">
-          <caret line="273" column="33" lean-forward="false" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.app/python3.6/envs/RoboND/lib/python3.5/site-packages/scipy/spatial/kdtree.py" />
     <entry file="file://$PROJECT_DIR$/code/geometry.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="757">
@@ -561,9 +576,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -581,6 +594,8 @@
           <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
@@ -605,9 +620,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
           <caret line="143" column="0" lean-forward="true" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -633,9 +646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1818">
           <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -645,6 +656,8 @@
           <caret line="4" column="32" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
@@ -661,17 +674,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/zyx_perspective.py" />
     <entry file="file://$USER_HOME$/.app/python3.6/envs/RoboND/lib/python3.5/site-packages/scipy/spatial/kdtree.py" />
-    <entry file="file://$PROJECT_DIR$/code/decision.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="58" column="66" lean-forward="false" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/drive_rover.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
+        <state relative-caret-position="216">
           <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding>
             <element signature="e#27#42#0" expanded="true" />
@@ -681,17 +686,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/rover_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="787">
-          <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+        <state relative-caret-position="1026">
+          <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1510836666057" expanded="true" signature="680:1495" ph="..." />
+            <marker date="1510836666057" expanded="true" signature="702:1495" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/rover_param.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
+        <state relative-caret-position="738">
           <caret line="41" column="6" lean-forward="false" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
           <folding />
         </state>
@@ -705,20 +712,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/perspective.py">
+    <entry file="file://$PROJECT_DIR$/code/geometry.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1440">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/perception.py">
+    <entry file="file://$PROJECT_DIR$/code/ray_detect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        <state relative-caret-position="342">
+          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -727,36 +732,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/object_detect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="847">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        <state relative-caret-position="324">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/geometry.py">
+    <entry file="file://$PROJECT_DIR$/code/perspective.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="79" column="47" lean-forward="true" selection-start-line="79" selection-start-column="47" selection-end-line="79" selection-end-column="47" />
+        <state relative-caret-position="413">
+          <caret line="100" column="16" lean-forward="false" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/ray_detect.py">
+    <entry file="file://$PROJECT_DIR$/code/decision.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1116">
+          <caret line="64" column="45" lean-forward="false" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/mesh_cluster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="396">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/perception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding />
         </state>
       </provider>

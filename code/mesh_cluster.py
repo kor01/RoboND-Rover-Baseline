@@ -19,7 +19,7 @@ def cluster_on_mesh(values, interval=None, bins=None):
     return []
 
   if interval is not None:
-    bins = int((values.max() - values.min()) / interval)
+    bins = int((values.max() - values.min()) / interval) + 1
 
   predicates, num_votes = vote_on_mesh(values, bins)
   clusters = []
