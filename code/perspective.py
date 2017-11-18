@@ -262,12 +262,7 @@ class CalibratedPerception(object):
     b_coords = drop_range(b_coords, axis=0, low=0, high=40)
     b_coords = drop_range(b_coords, axis=1, low=-160, high=160)
     #b_coords = quant_unique(b_coords, 8)
-    rotation = rotation_matrix_2d(state.yaw)
-    w_coords = rotation @ b_coords
-    w_coords = translation(*state.pos, w_coords)
-    w_coords = clip_fit_map(w_coords)
-    w_coords = unique_particles(w_coords)
-    return w_coords, b_coords
+    return b_coords
 
   def evaluate(self, image, state: RoverState):
     coords = flip_image_origin(image)
@@ -307,3 +302,12 @@ class CV2Perception(object):
       state.pos[1], state.yaw, spec.WORLD_SIZE)
     
     return w_coords, b_coords
+
+
+def to_world_coords(coords, state: RoverState):
+  rotation = rotation_matrix_2d(state.yaw)
+  w_coords = rotation @ coords
+  w_coords = translation(*state.pos, w_coords)
+  w_coords = clip_fit_map(w_coords)
+  w_coords = unique_particles(w_coords)
+  return w_coords

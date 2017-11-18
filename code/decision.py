@@ -1,6 +1,40 @@
 import numpy as np
 from rover_state import RoverState
 from geometry import rad_to_degree
+from geometry import degree_to_rad
+
+
+def predicate_stop(rover: RoverState):
+
+
+  idx = rover.nav_angles < degree_to_rad(3)
+  idx = np.logical_and(idx, rover.nav_angles > degree_to_rad(-3))
+
+  if idx.sum() == 0:
+    return True
+  
+  radius = rover.nav_dists[idx].max()
+  
+  if radius < 3:
+    return True
+  return False
+
+
+
+def predicate_resume(rover: RoverState):
+
+  idx = rover.nav_angles < degree_to_rad(3)
+  idx = np.logical_and(idx, rover.nav_angles > degree_to_rad(-3))
+  
+  if (idx.sum()) == 0:
+    return False
+  
+  radius = rover.nav_dists[idx].max()
+
+  if radius > 7:
+    return True
+  return False
+
 
 
 # This is where you can build a decision tree for determining throttle, brake and steer 
@@ -19,7 +53,7 @@ def decision_step(rover: RoverState):
         # Check for Rover.mode status
         if rover.mode == 'forward':
             # Check the extent of navigable terrain
-            if len(rover.nav_angles) >= rover.stop_forward:
+            if not predicate_stop(rover):
                 # If mode is forward, navigable terrain looks good 
                 # and velocity is below max, then throttle 
                 if rover.vel < rover.max_vel:
@@ -34,13 +68,14 @@ def decision_step(rover: RoverState):
                 
                 if rover.directions is None or len(rover.directions) == 0:
                     direction = np.mean(rover.nav_angles)
-                    if rover.step - rover.last_roll > 500:
+                    if rover.step - rover.last_roll > rover.memory_length:
                         rover.direction_pick = None
                 else:
                     if rover.direction_pick is None \
-                        or rover.direction_pick >= len(rover.directions):
-                        rover.direction_pick = np.random.randint(0, len(rover.directions))
+                       or len(rover.directions) != rover.last_num_directions:
+                        rover.direction_pick = -1 * np.random.randint(0, 2)
                         rover.last_roll = rover.step
+                        rover.last_num_directions = len(rover.directions)
                     
                     direction = rover.directions[rover.direction_pick]
                     print('picked direction:', direction, rover.step)
@@ -66,16 +101,9 @@ def decision_step(rover: RoverState):
                 rover.steer = 0
             # If we're not moving (vel < 0.2) then do something else
             elif rover.vel <= 0.2:
-                
-                mean_angle = np.pi / 2
 
-                if len(rover.nav_angles) > 0:
-                    mean_angle = abs(rover.nav_angles.mean())
-                
-                print('current mean_angle', mean_angle)
-                    
                 # Now we're stopped and we have vision data to see if there's a path forward
-                if len(rover.nav_angles) < rover.go_forward or mean_angle > np.pi / 8:
+                if not predicate_resume(rover):
                     rover.throttle = 0
                     # Release the brake to allow turning
                     rover.brake = 0

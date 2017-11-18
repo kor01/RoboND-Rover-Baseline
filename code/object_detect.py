@@ -66,15 +66,16 @@ def detect_obstacles(rays):
   return ret
 
 
-DIRECTION_DROP_RADIUS = 10
-ANGLE_INTERVAL = degree_to_rad(1)
+DIRECTION_DROP_RADIUS = 6.5
+ANGLE_INTERVAL = degree_to_rad(0.5)
+
 
 def detect_directions(rays):
   # drop segmented rays
-  rays = [r for r in rays if len(r.segment) == 1]
+  rays = [r for r in rays if len(r.segments) == 1]
 
   # drop short term rays
-  rays = [r for r in rays if r[0, 1] < DIRECTION_DROP_RADIUS]
+  rays = [r for r in rays if r.segments[0, 1] > DIRECTION_DROP_RADIUS]
 
   # mesh cluster on interval = 1 degree
   angles = np.array([r.theta for r in rays])

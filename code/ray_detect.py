@@ -14,7 +14,6 @@ def interpolate_ray(
 
   proj_ratio = dists / (dists + focal_length)
   proj_dists = focal_height * proj_ratio
-  print('project_dim', proj_dists.min(), proj_dists.max())
   # find gap by mesh in projection
   # mesh cluster the projected dists
 
@@ -24,7 +23,6 @@ def interpolate_ray(
   for cluster in clusters:
     start, end = dists[cluster].min(), dists[cluster].max()
     ret.append((start, end))
-  print('num_segs:', len(ret))
   return np.array(ret)
 
 
@@ -63,8 +61,6 @@ def particle_to_rays(
     vote_dist = dists[votes[i, :]]
     if len(vote_dist) <= 1:
       continue
-    print('vote_dims:', proposals[i],
-          vote_dist.min(), vote_dist.max(), len(vote_dist))
     ret.append(Ray(proposals[i], vote_dist))
 
   return ret

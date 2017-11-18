@@ -57,3 +57,5 @@ class RoverState(object):
     self.send_pickup = False # Set to True to trigger rock pickup
     self.step = 0
     self.last_roll = 0
+    self.memory_length = 100
+    self.last_num_directions = 0
