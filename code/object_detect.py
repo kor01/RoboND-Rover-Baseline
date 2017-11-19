@@ -32,6 +32,16 @@ def segment_navigable(img):
   return binary_image
 
 
+def segment_obstacles(img):
+
+  thresh = np.array(rover_param.STD_THRESH)
+  binary_image = img < thresh
+  binary_image = np.any(binary_image, axis=-1)
+  binary_image = binary_image.astype('uint8')
+  return binary_image
+
+
+
 WINDOW_SIZE = 5
 
 def drastic_change_radius(rays, idx):

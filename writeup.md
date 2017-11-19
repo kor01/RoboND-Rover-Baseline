@@ -21,10 +21,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./misc/rover_image.jpg
-[image2]: ./calibration_images/example_grid1.jpg
-[image3]: ./calibration_images/example_rock1.jpg
-
+[image1]: ./misc/my_rover.png
 
 
 ## Project Approach
@@ -100,12 +97,53 @@ the implementation of decision making step used in this project adhere the basel
 
 1. Camera Model
 
+    the camera model used here is a standard mathematical projection model with parameters:
+
+     * view point position (described in robot body fixed frame)
+
+     * projection plane origin coordinate (also described in robot body fixed frame)
+
+    when these parameters are known, we can compute the projection of every ground pixel (z = 0), if we know the rotational from world frame to robot body fixed frame.
+
+    inversely, we can also recover the planar coordinate (described in robot frame) of each ground pixel.
+
+    the cv2 perspective transform is a special case with the assumption that the roll and pitch is zero.
+
+    the detail of mathematical symbolic induction using this geometric model can be found in Mathematica notebook: ```code/perspective_full_equation.nb```
+
+    the symbolic expression obtained by this geometric model replicated as ```numpy``` code  in ```perspective.py```
+
+    the require camera parameters (```view_point and project_plane_origin```) is obtained by numerical optimization, using the calibration correspondence provided by this project (the grid corner pixel position and the position expressed in body fixed frame)
+
+    this numerical optimization is implemented in notebook ```camera_calibration.ipynb```
+
+    in ```perception.ipynb``` video clip, you can see the effectiveness of this approach.
 
 2. Mesh Clustering
+
+    in our problem, we need to cluster the particles from the perspective transform to ray based representation.
+
+    This requires to cluster the particles into rays.
+
+    Since we have a relatively fixed geometric dimension, a generic clustering algorithm (K-means or Euclidean clustering) is not appropriate and the performance is not acceptable.
+
+    Here I used a simple mesh based clustering method, implemented in ```code/mesh_cluster.py```
 
 
 3. Ray Based Representation
 
+    Ray here is defined as the collection of linear interval on the half line passing through origin
+
+    This geometric entity is particularly helpful in perspective transform interpolation and direction detection
+
+    Rays are geometric entity with two properties:
+
+      - angle, the angle of the ray w.r.t ```x-axis```
+      - segments, represented by a list of (start, end) tuple
+
+    the class is define in ```code/ray_detect.py```, and an associated function ```particles_to_rays()``` cluster rays from a set of particles
+
+    the demonstration of the usefulness in this project is in ```perception.ipynb```
 
 
 
@@ -122,13 +160,15 @@ the implementation of decision making step used in this project adhere the basel
 #### Notebook Analysis
  1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples:
 
+      - the process to obtain camera parameter is illustrated in ```calibration.ipynb```
       - The Analysis and experiment of perception algorithm is illustrated in notebook ```perception_analysis.ipynb```
+
 
 2. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result:
 
       - This is also implemented in ```perception_analysis.ipynb```
 
-![alt text][image2]
+
 #### Autonomous Navigation and Mapping
 
 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were:
@@ -138,16 +178,22 @@ the implementation of decision making step used in this project adhere the basel
 
 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
-    * the trail on my machine achieves ```79% fidelity``` and ```86% map coverage``` and recovers the positions of ```3 sample rocks```.
+    * the trail on my machine achieves ```78.2% fidelity``` and ```93.8% map coverage``` and recovers the positions of ```6 sample rocks```.
+
+
+3. The robot direction pick is random hence in some trail it takes some time (about 10 mins) for the rover to finish the mapping (> 95% map rate), below is a snapshot running on my machine (```intel i7 4 phisical cores```, ```anaconda numpy with intel-mkl```, ```cpu utlization:570% - 800%```)
+
+  ![alt text][image1]
 
 
 #### Parameter to Reproduce the Experiment:
 
 
-1. frame rate:
+1. frame rate: 8
 
-2. quality and resolution:
+2. quality: ```Fantastic```
 
+3. resolution: ```1024x768```
 
 #### Future Improvement:
 
