@@ -82,7 +82,7 @@ In this section, I will introduce the high level approach I used in this project
 
 the implementation of decision making step used in this project adhere the baseline implementation (simple reactive approach, without additional planning), and improves in following perspectives:
 
-1. better direction selection:
+1. **better direction selection:**
 
     - the direction choice of the baseline version used the mean angle of all particles. Here I used a random selection of the directions detected in the above perception pipeline.
 
@@ -90,7 +90,7 @@ the implementation of decision making step used in this project adhere the basel
 
     - since the action of taking one option when facing many direction choices takes an interval of time to accomplish, one additional trick is introduced to make the rover direction selection consistent over a short period of steps, that is the choice of direction represented by random int will only changed every 100 steps, or when the number of choices is changed.
 
-2. better mode switch predicate:
+2. **better mode switch predicate:**
 
  - the switch predicate of ```forward``` and ```stop``` mode is improved, instead of using the number of navi-angle, I used length of navigable rays in the front sight (-3 to 3 degree) of the rover, as indicator of stop and resume, when results in much better collision avoidance (to map edge and obstacles)
 

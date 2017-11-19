@@ -11,9 +11,9 @@ def in_range(values, min_val, max_val):
 
 
 def segment_rock_sample(img):
-  r_predicate = in_range(img[:, :, 0], 130, 150)
-  g_predicate = in_range(img[:, :, 1], 95, 110)
-  b_predicate = in_range(img[:, :, 2], 0, 25)
+  r_predicate = in_range(img[:, :, 0], 120, 160)
+  g_predicate = in_range(img[:, :, 1], 90, 120)
+  b_predicate = in_range(img[:, :, 2], 0, 50)
   ret = np.logical_and(r_predicate, g_predicate)
   ret = np.logical_and(ret, b_predicate)
   ret = ret.astype('uint8')

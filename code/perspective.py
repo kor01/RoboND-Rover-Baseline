@@ -17,25 +17,6 @@ import rover_param as spec
 from rover_state import RoverState
 
 
-class ParticleExtractor(metaclass=abc.ABCMeta):
-
-  @abc.abstractmethod
-  def extract_particles(self, coords, singularity):
-    pass
-
-
-class PerspectiveTransform(metaclass=abc.ABCMeta):
-
-  @abc.abstractmethod
-  def get_singular(self, roll, pitch):
-    pass
-
-  @abc.abstractmethod
-  def particle_transform(self, roll, pitch, particles):
-    pass
-
-
-
 def perspective_numerator(e, c, pitch, roll):
   ex, ey, ez = e
   cx, cy, cz = c
@@ -82,6 +63,47 @@ def singular_line(ty, e, pitch, roll):
   return ex - ez * ps / pc - (ey - ty) * rs / (rc * pc)
 
 
+def clip_fit_map(particles):
+  return clip_to_integer(particles, spec.WORLD_SIZE)
+
+
+def pixel_scale_to_frame_scale(quant):
+  return quant / float(spec.PIXEL_SCALING)
+
+
+def create_zyx_perspective():
+  horizon_length = float(spec.FRAME_SHAPE[1]) / spec.PIXEL_SCALING
+  return ZYXRotatedPerspective(
+    spec.CAMERA_POSITION, spec.VIEW_POINT_POSITION, horizon_length)
+
+
+def unique_particles(particles):
+  mp = np.zeros((spec.WORLD_SIZE, spec.WORLD_SIZE), dtype=np.uint8)
+  mp[particles[0], particles[1]] = 1
+  ret = np.array(mp.nonzero())
+  return ret
+
+
+def to_world_coords(coords, state: RoverState):
+  rotation = rotation_matrix_2d(state.yaw)
+  w_coords = rotation @ coords
+  w_coords = translation(*state.pos, w_coords)
+  w_coords = clip_fit_map(w_coords)
+  w_coords = unique_particles(w_coords)
+  return w_coords
+
+
+class PerspectiveTransform(metaclass=abc.ABCMeta):
+
+  @abc.abstractmethod
+  def get_singular(self, roll, pitch):
+    pass
+
+  @abc.abstractmethod
+  def particle_transform(self, roll, pitch, particles):
+    pass
+
+
 class ZYXRotatedPerspective(PerspectiveTransform):
   def __init__(self, camera_pos, view_pos, horizon_length):
     self._c = camera_pos
@@ -115,65 +137,10 @@ class ZYXRotatedPerspective(PerspectiveTransform):
     return numerator / denominator
 
 
-class ThresholdExtractor(ParticleExtractor):
-
-  def __init__(self, threshold=(160, 160, 160)):
-
-    self._threshold = np.array(threshold)
-
-  def extract_particles(self, coords, singularity):
-    coords = coords > self._threshold
-    coords = np.all(coords, axis=-1)
-    coords = coords.astype('float32')
-    ret = np.array(coords.nonzero())
-    return ret
-
-
-
-def clip_fit_map(particles):
-  return clip_to_integer(particles, spec.WORLD_SIZE)
-
-
-def singular_to_frame_pos(singular, drop):
-  return int(singular * spec.PIXEL_SCALING) - drop
-
-
-def pixel_scale_to_frame_scale(quant):
-  return quant / float(spec.PIXEL_SCALING)
-
-
-def zoom_in(img: np.ndarray, boundary, factor: np.ndarray):
-  img = img[boundary[0]: boundary[1], :, :]
-  factor = factor.flatten()
-  shape = factor * img.shape[:2]
-  return cv2.resize(img, (shape[1], shape[0]), fx=0, fy=0)
-
-
-def create_zyx_perspective():
-  horizon_length = float(spec.FRAME_SHAPE[1]) / spec.PIXEL_SCALING
-  return ZYXRotatedPerspective(
-    spec.CAMERA_POSITION, spec.VIEW_POINT_POSITION, horizon_length)
-
-
-def create_threshold_extractor():
-  return ThresholdExtractor(spec.DEFAULT_THRESHOLD)
-
-
-def get_horizon_length():
-  return spec.PIXEL_SCALING / float(spec.FRAME_SHAPE[1])
-
-
-def unique_particles(particles):
-  mp = np.zeros((spec.WORLD_SIZE, spec.WORLD_SIZE), dtype=np.uint8)
-  mp[particles[0], particles[1]] = 1
-  ret = np.array(mp.nonzero())
-  return ret
-
 
 class CalibratedPerception(object):
 
   def __init__(self, drop=2):
-    self._horizon_length = get_horizon_length()
     self._perspect = create_zyx_perspective()
     self._zyx_singular_drop = drop
 
@@ -189,8 +156,8 @@ class CalibratedPerception(object):
       particles=particles, pitch=pitch, roll=roll)
     b_coords = drop_range(b_coords, axis=0, low=0, high=40)
     b_coords = drop_range(b_coords, axis=1, low=-160, high=160)
-    #b_coords = quant_unique(b_coords, 8)
     return b_coords
+
 
   def evaluate(self, image, state: RoverState):
     coords = flip_image_origin(image)
@@ -199,10 +166,6 @@ class CalibratedPerception(object):
     return self.trans_particles(particles, state)
 
 
-
-CV2_PERSPECT_PARAM = cv2.getPerspectiveTransform(
-  spec.STD_PERSPECTIVE_SOURCE, spec.STD_PERSPECTIVE_TARGET)
-  
 class CV2Perception(object):
 
   def __init__(self):
@@ -230,12 +193,3 @@ class CV2Perception(object):
       state.pos[1], state.yaw, spec.WORLD_SIZE)
     
     return w_coords, b_coords
-
-
-def to_world_coords(coords, state: RoverState):
-  rotation = rotation_matrix_2d(state.yaw)
-  w_coords = rotation @ coords
-  w_coords = translation(*state.pos, w_coords)
-  w_coords = clip_fit_map(w_coords)
-  w_coords = unique_particles(w_coords)
-  return w_coords
